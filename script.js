@@ -1,0 +1,42 @@
+let taskList = document.getElementById('taskList');
+
+function addTask() {
+    let taskInput = document.getElementById('taskInput');
+    let taskText = taskInput.value; //Remplire le tache 
+
+    if(taskText === ""){
+        return; 
+    }
+    let li = document.createElement('li')
+li.innerHTML = taskText;
+let editButton = document.createElement('button');
+editButton.innerHTML ='<ion-icon name="pencil-outline" class="modify"></ion-icon>' 
+editButton.onclick = function(){
+    editTask(li)
+}
+let deleteButton = document.createElement('button');
+deleteButton.innerHTML = '<ion-icon name="trash-outline" class="delete"></ion-icon>'
+deleteButton.onclick = function(){
+    deleteTask(li)
+}
+li.appendChild(editButton);
+li.appendChild(deleteButton);
+taskList.appendChild(li);
+taskInput.value = "";
+
+}
+
+function editTask (task){
+    var taskTextElement = task.firstChild;
+    var taskText = taskTextElement.textContent;
+
+    var newTaskText = prompt("Modifier la tache:", taskText);
+    if(newTaskText === null || newTaskText === ""){
+        return; 
+    }
+    taskTextElement.textContent = newTaskText;
+}
+
+function deleteTask(task){
+taskList.removeChild(task); 
+}
